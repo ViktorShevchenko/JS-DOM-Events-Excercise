@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Excercise with the DOM</title>
+	<style>
+		button {
+			background-color: cyan;
+		}
+		.active {
+			background-color: beige;
+			border-top: 2px yellow solid;
+		}
+	</style>
+</head>
+<body>
+	<h1 id="our-headline">Click a list item to replace this text</h1>
+	<button id="our-button">Add new item</button>
+	
+	<ul id="our-list">
+		<li>First item</li>
+		<li>Second item</li>
+		<li>Third item</li>
+		<li>Fourth item</li>
+		<li>Fifth item</li>
+	</ul>
+
+	<script>
+		var counter = 1;
+		var ourButton = document.getElementById('our-button');
+		var ourList = document.getElementById('our-list');
+		var ourHeadline = document.getElementById('our-headline');
+		var listItems = document.getElementById('our-list').getElementsByTagName('li');
+
+		ourList.addEventListener('click', activateItem);
+
+		function activateItem(e){
+			if(e.target.nodeName==='LI'){
+				ourHeadline.innerHTML = e.target.innerHTML;
+				for(var i = 0; i < e.target.parentNode.children.length; i++){
+				e.target.parentNode.children[i].classList.remove('active');
+			}
+				e.target.classList.add('active');
+			}		
+		}
+
+		ourButton.addEventListener('click', createNewItem);
+
+		function createNewItem(){
+			ourList.innerHTML += '<li> New Item ' + counter + '</li>';
+			counter++;
+		}
+ 
+	</script>
+	
+</body>
+</html>
